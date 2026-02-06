@@ -1,0 +1,67 @@
+#  Python CLI Password Manager
+
+A secure, terminal-based password manager built with Python. This tool allows users to store their credentials locally in an encrypted format, ensuring that sensitive data is protected even if the file is accessed by others.
+
+##  Features
+
+* **Strong Encryption:** Uses `Fernet` (AES-128) for symmetric encryption.
+* **Secure Key Derivation:** Implements `PBKDF2HMAC` with SHA256 to derive encryption keys from the master password.
+* **Local Storage:** Data is saved in a local `vault.json.enc` file.
+* **CRUD Operations:**
+    * Add new passwords
+    * List all stored services.
+    * Search for specific credentials.
+    * Delete outdated entries.
+* **Terminal Interface:** Simple and distraction-free CLI (Command Line Interface).
+
+## Installation
+
+1.  **Clone the project:**
+    ```bash
+    git clone [https://github.com/mstfd5/python-password-manager.git](https://github.com/mstfd5/python-password-manager.git)
+    cd python-password-manager
+    ```
+
+2.  **Run the app:**
+    ```bash
+    python password_manager.py
+    ```
+
+2.  **Install dependencies:**
+    This project requires the `cryptography` library.
+    ```bash
+    pip install cryptography
+    ```
+
+##  Usage
+
+1.  Run the script:
+    ```bash
+    python password_manager.py
+    ```
+2.  **First Run:** You will be asked to set a **Master Password**. Do not forget this! It is the only key to unlock your vault.
+3.  **Menu Options:**
+    * Select `1` to add a new website/password.
+    * Select `2` to see your list.
+    * Select `3` to search for a specific site.
+    * Select `4` to delete an entry.
+    * Select `5` to save and exit safely.
+
+##  Security Disclaimer
+
+This project was created for **educational purposes** to learn about file handling, data structures, and basic cryptography implementation in Python.
+* While it uses standard encryption libraries, **do not use this for highly sensitive real-world banking passwords** without further security auditing.
+* The "salt" value is currently static for simplicity (MVP version).
+
+##  Roadmap / Future Improvements
+
+* [ ] Add a random password generator.
+* [ ] Implement dynamic salt storage per user.
+* [ ] Create a graphical user interface (GUI) with `tkinter` or `PyQt`.
+* [ ] Add "Copy to Clipboard" functionality.
+
+##  Author
+
+**[Mustafa Dikyuva]**
+* Management Information Systems Student
+* Cybersecurity Enthusiast
