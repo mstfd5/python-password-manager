@@ -1,0 +1,38 @@
+# Secure Password Vault (v2) - Encrypted SQLite Edition
+
+This project is the second iteration of my local Password Manager. It upgrades the previous MVP (Minimum Viable Product) JSON-based architecture to a more robust, secure, and efficient database-driven backend.
+
+## What's New in v2? (Changelog & Upgrades)
+
+I have significantly restructured the backend to resolve the performance and security bottlenecks of the v1 architecture:
+
+* **Storage Migration (JSON to SQLite):** Replaced the flat-file JSON storage with an embedded `SQLite3` database. Instead of loading and completely rewriting the entire file into memory for every new entry, the system now uses surgical SQL queries (`INSERT`, `SELECT`), making it instantly scalable and highly efficient.
+* **Cell-Level AES Encryption:** Integrated the `cryptography.fernet` library. Passwords are no longer saved in plain text. Only the specific password cells are encrypted (as `BLOB` data), allowing the database to search for usernames or platforms without decrypting the entire vault first.
+* **Object-Oriented Architecture (OOP):** Refactored the procedural codebase into a structured `DatabaseManager` class. This encapsulates the database connections, cursor management, and cryptographic keys away from the frontend logic.
+* **SQL Injection Prevention:** Implemented parameterized SQL queries (using `?` placeholders) to ensure all user inputs are sanitized, eliminating injection vulnerabilities.
+
+## Prerequisites
+
+This application relies on the `cryptography` library to handle the AES encryption/decryption processes. To install it, run:
+
+```bash
+pip install cryptography
+
+How to Use
+
+    Navigate to the project directory and run the script:
+    Bash
+
+    python locker.py
+
+    Initial Setup: Upon the first execution, the script will automatically generate two essential files:
+
+        vault.db: The SQLite database containing your encrypted data.
+
+        secret.key: The unique cryptographic key used for encryption.
+
+    Follow the on-screen CLI menu to add new passwords or view your secure vault.
+
+Critical Security Notice
+
+The automatically generated secret.key file is the master key to your vault. Do not delete, lose, or upload this file to a public repository. If this key is lost, the data inside vault.db cannot be decrypted by any means and will be permanently unrecoverable.
